@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="btnGET">发起不带参数的请求</button>
+    <button id="btnGET2">发起带参数的请求</button>
+    <button id="btnPOST">发起Post请求</button>
+    <button id="btnAGET">ajax发起get请求</button>
+    <button id="btnAPOST">ajax发起Post请求</button>
+    <script>
+        $(function () {
+            $("#btnGET").on("click", function () {
+                $.get('http://www.liulongbin.top:3006/api/getbooks', function (res) {
+                    console.log(res)
+                })
+            })
+            $("#btnGET2").on("click", function () {
+                $.get('http://www.liulongbin.top:3006/api/getbooks', { id: 1 },function (res) {
+                    console.log(res)
+                })
+            })
+            $("#btnPOST").on("click", function () {
+                $.post(
+                    'http://www.liulongbin.top:3006/api/addbook', 
+                    { bookname:'水浒传',author:'施耐庵',publisher:'上海图书出版社'},
+                    function(res){
+                        console.log(res);
+                    }
+                )
+            })
+            $("#btnAGET").on("click", function(){
+                $.ajax({
+                    type:'GET',
+                    url:'http://www.liulongbin.top:3006/api/getbooks' ,
+                    data:{},
+                    success: function(res){
+                        console.log(res);
+                    }
+                })
+            })
+            $("#btnAPOST").on("click", function(){
+                $.ajax({
+                    type:'POST',
+                    url: 'http://www.liulongbin.top:3006/api/addbook' ,
+                    data: { bookname:'水浒传',author:'施耐庵',publisher:'上海图书出版社'},
+                    success: function(res){
+                        console.log(res);
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
